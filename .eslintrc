@@ -1,9 +1,6 @@
 {
     "extends": "@slimio/eslint-config",
     "rules": {
-        "lines-between-class-members": "off",
-        "jsdoc/require-jsdoc": "off",
-        "func-style": "off",
-        "callback-return": "off"
+        "jsdoc/require-jsdoc": "off"
     }
 }

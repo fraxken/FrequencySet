@@ -1,9 +1,15 @@
 "use strict";
 
+// Require Internal Dependencies
+const { isIterable, isValidStringPrimitive } = require("./src/utils.js");
+
 class FrequencySet {
     #data = new Map();
 
     constructor(iterable = []) {
+        if (!isIterable(iterable)) {
+            throw new TypeError("object is not iterable (cannot read property Symbol(Symbol.iterator))");
+        }
         for (const value of iterable) {
             this.add(value);
         }
@@ -60,10 +66,9 @@ class FrequencySet {
     toJSON() {
         const payload = {};
         for (const [value, count] of this.entries()) {
-            if (typeof value === "function" || typeof value === "object") {
-                continue;
+            if (isValidStringPrimitive(value)) {
+                payload[String(value)] = count;
             }
-            payload[String(value)] = count;
         }
 
         return payload;
