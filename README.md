@@ -5,10 +5,10 @@
 ![dep](https://img.shields.io/david/fraxken/FrequencySet)
 ![size](https://img.shields.io/github/languages/code-size/fraxken/FrequencySet)
 
-A set that keeps the frequency of occurrences.
+A Set structure that keeps the frequency of occurrences.
 
 ## Requirements
-- [Node.js](https://nodejs.org/en/) v12 or higher
+- [Node.js](https://nodejs.org/en/) v14 or higher
 
 ## Getting Started
 
@@ -35,7 +35,26 @@ console.log(MySet.toJSON()); // { foo: 3, bar: 2 }
 ```
 
 ## API
-Same API as a classical Set. But iterables return the unique value as `key` and the count as `value` instead of the default `[key, key]` of the native Set object.
+FrequencySet implements exactly the same interfaces as an ES6 [Set](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Set). Except for the **@@ Iteration Symbol** and the **entries()**. Instead of returning the unique value as key and value, FrequencySet return the unique value as key and the count as value.
+
+```js
+const mySet = new FrequencySet(["foo", "foo", "bar"]);
+
+for (const [uniqueValue, count] of mySet) {
+    console.log([uniqueValue, count]); // [foo, 2] and [bar, 1]
+}
+```
+
+### toJSON()
+FrequencySet implement a custom toJSON() method which will allow an automatic transformation into JSON.
+
+```js
+const mySet = new FrequencySet(["foo", "foo", "bar"]);
+
+console.log(mySet.toJSON()); // { foo: 2, bar: 1 };
+```
+
+The toJSON method does not take into account **functions** and **objects**.
 
 ## License
 MIT
