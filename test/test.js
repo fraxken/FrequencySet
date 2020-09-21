@@ -3,6 +3,14 @@
 // Require Internal Dependencies
 const FrequencySet = require("../");
 
+test("Create a new FrequencySet with null or undefined must work", () => {
+    const v1 = new FrequencySet(null);
+    const v2 = new FrequencySet(undefined);
+
+    expect([...v1.entries()]).toMatchObject([]);
+    expect([...v2.entries()]).toMatchObject([]);
+});
+
 test("Create a new FrequencySet with no values", () => {
     const fs = new FrequencySet();
     expect(fs.has("boo")).toBe(false);
