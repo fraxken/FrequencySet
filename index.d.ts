@@ -1,8 +1,8 @@
 declare class FrequencySet<T = any> {
     private data: Map<T, { count: number }>;
 
-    constructor(iterable?: Iterable<T>);
-    add(value: T): this;
+    constructor(iterable?: Iterable<T> | Iterable<[T, number]>);
+    add(value: T, count?: number): this;
     clear(): void;
     delete(value: T): boolean;
     entries(): IterableIterator<[T, number]>;
@@ -10,7 +10,7 @@ declare class FrequencySet<T = any> {
     has(value: T): boolean;
     values(): IterableIterator<T>;
     [Symbol.iterator](): IterableIterator<[T, number]>;
-    toJSON(): Record<string, number>;
+    toJSON(): [T, number];
 }
 
 export = FrequencySet;
