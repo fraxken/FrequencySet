@@ -10,4 +10,8 @@ function isValidStringPrimitive(value) {
     return !(vT === "function" || (vT === "object" && value !== null));
 }
 
-module.exports = { isIterable, isValidStringPrimitive };
+function isKeyValueArray(array) {
+    return Array.isArray(array) && array.length === 2 && typeof array[1] === "number";
+}
+
+module.exports = { isIterable, isValidStringPrimitive, isKeyValueArray };

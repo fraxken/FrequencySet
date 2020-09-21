@@ -28,6 +28,18 @@ test("Create a new FrequencySet with a unique Set", () => {
     expect([...fs.values()]).toMatchObject(["boo", "foo"]);
 });
 
+test("Create a new FrequencySet with another FrequencySet", () => {
+    const fs = new FrequencySet(new FrequencySet(["boo", "boo"]));
+
+    expect([...fs.entries()]).toMatchObject([["boo", 2]]);
+});
+
+test("Create a new FrequencySet with value and count", () => {
+    const fs = new FrequencySet([["boo", 5], ["foo", 2]]);
+
+    expect([...fs.entries()]).toMatchObject([["boo", 5], ["foo", 2]]);
+});
+
 test("Create a new FrequencySet with a non-iterable value (it must throw a TypeError)", () => {
     expect.assertions(2);
     try {
@@ -54,6 +66,24 @@ test("Add values to a FrequencySet (with chaining)", () => {
     expect(fsBis).toStrictEqual(fs);
     expect([...fs.entries()]).toMatchObject([["boo", 3]]);
 });
+
+test("Add values to a FrequencySet with a custom count", () => {
+    const fs = new FrequencySet().add("boo", 20);
+    expect([...fs.entries()]).toMatchObject([["boo", 20]]);
+});
+
+test("Add count must be a number", () => {
+    expect.assertions(2);
+    try {
+        const fs = new FrequencySet();
+        fs.add("boo", {});
+    }
+    catch (error) {
+        expect(error.name).toBe("TypeError");
+        expect(error.message).toStrictEqual("count must be a number");
+    }
+});
+
 
 test("Delete a value that is present in the FrequencySet", () => {
     const fs = new FrequencySet();
