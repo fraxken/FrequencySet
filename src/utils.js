@@ -1,7 +1,7 @@
 "use strict";
 
 function isIterable(object) {
-    return object !== null && typeof object[Symbol.iterator] === "function";
+    return typeof object[Symbol.iterator] === "function";
 }
 
 function isValidStringPrimitive(value) {

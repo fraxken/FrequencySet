@@ -81,19 +81,19 @@ test("Clear a FrequencySet", () => {
 test("Convert a FrequencySet to a JSON", () => {
     // eslint-disable-next-line no-empty-function
     const fs = new FrequencySet(["foo", "foo", "boo", "bar", () => {}]);
-    expect(fs.toJSON()).toMatchObject({
-        foo: 2,
-        boo: 1,
-        bar: 1
-    });
+    expect(fs.toJSON()).toMatchObject([
+        ["foo", 2],
+        ["boo", 1],
+        ["bar", 1]
+    ]);
 });
 
 test("toJSON() must skip all non-valid string value", () => {
     // eslint-disable-next-line no-empty-function
     const fs = new FrequencySet([() => {}, null, {}]);
-    expect(fs.toJSON()).toMatchObject({
-        null: 1
-    });
+    expect(fs.toJSON()).toMatchObject([
+        ["null", 1]
+    ]);
 });
 
 test("forEach FrequencySet", () => {

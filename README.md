@@ -31,7 +31,6 @@ MySet.add("foo");
 MySet.add("bar");
 
 console.log([...MySet.entries()]); // [["foo", 3], ["bar", 2]]
-console.log(MySet.toJSON()); // { foo: 3, bar: 2 }
 ```
 
 ## API
@@ -51,7 +50,7 @@ FrequencySet implement a custom toJSON() method which will allow an automatic tr
 ```js
 const mySet = new FrequencySet(["foo", "foo", "bar"]);
 
-console.log(mySet.toJSON()); // { foo: 2, bar: 1 };
+console.log(mySet.toJSON()); // [foo, 2] and [bar, 1];
 ```
 
 The toJSON method does not take into account **functions** and **objects**.

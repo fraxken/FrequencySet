@@ -7,6 +7,9 @@ class FrequencySet {
     #data = new Map();
 
     constructor(iterable = []) {
+        if (iterable === null || iterable === undefined) {
+            return;
+        }
         if (!isIterable(iterable)) {
             throw new TypeError("object is not iterable (cannot read property Symbol(Symbol.iterator))");
         }
@@ -27,16 +30,11 @@ class FrequencySet {
     }
 
     clear() {
-        this.#data = new Map();
+        this.#data.clear();
     }
 
     delete(value) {
-        if (!this.#data.has(value)) {
-            return false;
-        }
-        this.#data.delete(value);
-
-        return true;
+        return this.#data.delete(value);
     }
 
     * entries() {
@@ -64,10 +62,10 @@ class FrequencySet {
     }
 
     toJSON() {
-        const payload = {};
+        const payload = [];
         for (const [value, count] of this.entries()) {
             if (isValidStringPrimitive(value)) {
-                payload[String(value)] = count;
+                payload.push([String(value), count]);
             }
         }
 
