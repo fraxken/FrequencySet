@@ -31,6 +31,9 @@ MySet.add("foo");
 MySet.add("bar");
 
 console.log([...MySet.entries()]); // [["foo", 3], ["bar", 2]]
+
+const clone = new FrequencySet(MySet);
+console.log(clone);
 ```
 
 ## API
@@ -42,6 +45,13 @@ const mySet = new FrequencySet(["foo", "foo", "bar"]);
 for (const [uniqueValue, count] of mySet) {
     console.log([uniqueValue, count]); // [foo, 2] and [bar, 1]
 }
+```
+
+Also the add method has been extended with a additional `count` argument witch take a number.
+```js
+const mySet = new FrequencySet().add("foo", 10);
+
+console.log(mySet.toJSON()); // ["foo", 10]
 ```
 
 ### toJSON()
