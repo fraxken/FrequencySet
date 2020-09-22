@@ -1,6 +1,6 @@
 {
   "name": "frequency-set",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set that keeps the frequency of occurrences.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,8 @@
   },
   "files": [
       "index.js",
-      "index.d.ts"
+      "index.d.ts",
+      "src"
   ],
   "keywords": [
       "set",
