@@ -11,15 +11,15 @@
     "url": "git+https://github.com/fraxken/FrequencySet.git"
   },
   "files": [
-      "index.js",
-      "index.d.ts",
-      "src"
+    "index.js",
+    "index.d.ts",
+    "src"
   ],
   "keywords": [
-      "set",
-      "frequency",
-      "count",
-      "map"
+    "set",
+    "frequency",
+    "count",
+    "map"
   ],
   "author": "GENTILHOMME Thomas <gentilhomme.thomas@gmail.com>",
   "license": "MIT",
@@ -29,6 +29,6 @@
   "homepage": "https://github.com/fraxken/FrequencySet#readme",
   "devDependencies": {
     "@slimio/eslint-config": "^4.1.0",
-    "jest": "^26.4.2"
+    "jest": "^27.3.1"
   }
 }
