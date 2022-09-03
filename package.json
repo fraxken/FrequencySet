@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/fraxken/FrequencySet#readme",
   "devDependencies": {
-    "@slimio/eslint-config": "^4.1.0",
-    "jest": "^27.3.1"
+    "@slimio/eslint-config": "^5.0.0",
+    "jest": "^29.0.2"
   }
 }
