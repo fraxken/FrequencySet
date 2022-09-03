@@ -1,11 +1,25 @@
-# FrequencySet
-![version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/fraxken/FrequencySet/master/package.json&query=$.version&label=Version)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/fraxken/FrequencySet/commit-activity)
-![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
-![dep](https://img.shields.io/david/fraxken/FrequencySet)
-![size](https://img.shields.io/github/languages/code-size/fraxken/FrequencySet)
+<p align="center"><h1 align="center">
+  FrequencySet
+</h1>
 
-A Set structure that keeps the frequency of occurrences.
+<p align="center">
+  An ES6 Set compliant structure that keeps the frequency of occurrences.
+</p>
+
+<p align="center">
+    <a href="https://github.com/fraxken/FrequencySet">
+        <img src="https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/fraxken/FrequencySet/master/package.json&query=$.version&label=Version">
+    </a>
+    <a href="https://github.com/fraxken/FrequencySet">
+        <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="maintenance">
+    </a>
+    <a href="https://github.com/fraxken/FrequencySet">
+        <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
+    </a>
+    <a href="https://github.com/fraxken/FrequencySet">
+        <img src="https://img.shields.io/github/workflow/status/fraxken/FrequencySet/Node.js%20CI" alt="githubaction">
+    </a>
+</p>
 
 ## Requirements
 - [Node.js](https://nodejs.org/en/) v14 or higher
