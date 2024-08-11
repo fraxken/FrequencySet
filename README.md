@@ -22,7 +22,7 @@
 </p>
 
 ## Requirements
-- [Node.js](https://nodejs.org/en/) v14 or higher
+- [Node.js](https://nodejs.org/en/) v20 or higher
 
 ## Getting Started
 
