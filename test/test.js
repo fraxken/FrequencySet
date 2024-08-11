@@ -1,3 +1,8 @@
+/* eslint-disable no-empty-function */
+// Require Node.js Dependencies
+const { test } = require("node:test");
+const assert = require("node:assert");
+
 // Require Internal Dependencies
 const FrequencySet = require("../");
 
@@ -5,119 +10,105 @@ test("Create a new FrequencySet with null or undefined must work", () => {
   const v1 = new FrequencySet(null);
   const v2 = new FrequencySet(undefined);
 
-  expect([...v1.entries()]).toMatchObject([]);
-  expect([...v2.entries()]).toMatchObject([]);
+  assert.deepStrictEqual([...v1.entries()], []);
+  assert.deepStrictEqual([...v2.entries()], []);
 });
 
 test("Create a new FrequencySet with no values", () => {
   const fs = new FrequencySet();
-  expect(fs.has("boo")).toBe(false);
-  expect([...fs.entries()]).toMatchObject([]);
+  assert.strictEqual(fs.has("boo"), false);
+  assert.deepStrictEqual([...fs.entries()], []);
 });
 
 test("Create a new FrequencySet with some values", () => {
   const fs = new FrequencySet(["foo", "bar"]);
-  expect(fs.has("foo")).toBe(true);
-  expect([...fs.entries()]).toMatchObject([["foo", 1], ["bar", 1]]);
+  assert.strictEqual(fs.has("foo"), true);
+  assert.deepStrictEqual([...fs.entries()], [["foo", 1], ["bar", 1]]);
 });
 
 test("Create a new FrequencySet with a unique Set", () => {
   const fs = new FrequencySet(new Set(["boo", "foo"]));
-  expect([...fs.values()]).toMatchObject(["boo", "foo"]);
+  assert.deepStrictEqual([...fs.values()], ["boo", "foo"]);
 });
 
 test("Create a new FrequencySet with another FrequencySet", () => {
   const fs = new FrequencySet(new FrequencySet(["boo", "boo"]));
-
-  expect([...fs.entries()]).toMatchObject([["boo", 2]]);
+  assert.deepStrictEqual([...fs.entries()], [["boo", 2]]);
 });
 
 test("Create a new FrequencySet with value and count", () => {
   const fs = new FrequencySet([["boo", 5], ["foo", 2]]);
-
-  expect([...fs.entries()]).toMatchObject([["boo", 5], ["foo", 2]]);
+  assert.deepStrictEqual([...fs.entries()], [["boo", 5], ["foo", 2]]);
 });
 
 test("Create a new FrequencySet with a non-iterable value (it must throw a TypeError)", () => {
-  expect.assertions(2);
-  try {
+  assert.throws(() => {
     new FrequencySet({});
-  }
-  catch (error) {
-    expect(error.name).toBe("TypeError");
-    expect(error.message).toStrictEqual("object is not iterable (cannot read property Symbol(Symbol.iterator))");
-  }
+  }, TypeError, "object is not iterable (cannot read property Symbol(Symbol.iterator))");
 });
 
 test("Add values to a FrequencySet (with no chaining)", () => {
   const fs = new FrequencySet();
-
   const fsBis = fs.add("boo");
-  expect(fsBis).toStrictEqual(fs);
-  expect([...fs.values()]).toMatchObject(["boo"]);
+
+  assert.strictEqual(fsBis, fs);
+  assert.deepStrictEqual([...fs.values()], ["boo"]);
 });
 
 test("Add values to a FrequencySet (with chaining)", () => {
   const fs = new FrequencySet();
-
   const fsBis = fs.add("boo").add("boo").add("boo");
-  expect(fsBis).toStrictEqual(fs);
-  expect([...fs.entries()]).toMatchObject([["boo", 3]]);
+
+  assert.strictEqual(fsBis, fs);
+  assert.deepStrictEqual([...fs.entries()], [["boo", 3]]);
 });
 
 test("Add values to a FrequencySet with a custom count", () => {
   const fs = new FrequencySet().add("boo", 20);
-  expect([...fs.entries()]).toMatchObject([["boo", 20]]);
+  assert.deepStrictEqual([...fs.entries()], [["boo", 20]]);
 });
 
 test("Add count must be a number", () => {
-  expect.assertions(2);
-  try {
+  assert.throws(() => {
     const fs = new FrequencySet();
     fs.add("boo", {});
-  }
-  catch (error) {
-    expect(error.name).toBe("TypeError");
-    expect(error.message).toStrictEqual("count must be a number");
-  }
+  }, TypeError, "count must be a number");
 });
-
 
 test("Delete a value that is present in the FrequencySet", () => {
   const fs = new FrequencySet();
 
   fs.add("boo");
-  expect(fs.has("boo")).toStrictEqual(true);
+  assert.strictEqual(fs.has("boo"), true);
 
   const result = fs.delete("boo");
-  expect(result).toStrictEqual(true);
-  expect(fs.has("boo")).toStrictEqual(false);
+  assert.strictEqual(result, true);
+  assert.strictEqual(fs.has("boo"), false);
 });
 
 test("Delete a value that is not present in the FrequencySet", () => {
   const fs = new FrequencySet();
 
   const result = fs.delete("boo");
-  expect(result).toStrictEqual(false);
+  assert.strictEqual(result, false);
 });
 
 test("Retrieve unique values from the FrequencySet", () => {
   const fs = new FrequencySet([1, 2, "foo", 88n]);
-  expect([...fs.values()]).toMatchObject([1, 2, "foo", 88n]);
+  assert.deepStrictEqual([...fs.values()], [1, 2, "foo", 88n]);
 });
 
 test("Clear a FrequencySet", () => {
   const fs = new FrequencySet([1, 2, "foo", 88n]);
   const result = fs.clear();
 
-  expect(result).toStrictEqual(undefined);
-  expect([...fs.values()]).toMatchObject([]);
+  assert.strictEqual(result, undefined);
+  assert.deepStrictEqual([...fs.values()], []);
 });
 
 test("Convert a FrequencySet to a JSON", () => {
-  // eslint-disable-next-line no-empty-function
   const fs = new FrequencySet(["foo", "foo", "boo", "bar", () => { }]);
-  expect(fs.toJSON()).toMatchObject([
+  assert.deepStrictEqual(fs.toJSON(), [
     ["foo", 2],
     ["boo", 1],
     ["bar", 1]
@@ -125,9 +116,8 @@ test("Convert a FrequencySet to a JSON", () => {
 });
 
 test("toJSON() must skip all non-valid string value", () => {
-  // eslint-disable-next-line no-empty-function
   const fs = new FrequencySet([() => { }, null, {}]);
-  expect(fs.toJSON()).toMatchObject([
+  assert.deepStrictEqual(fs.toJSON(), [
     ["null", 1]
   ]);
 });
@@ -139,9 +129,9 @@ test("forEach FrequencySet", () => {
   fs.forEach((value, count) => {
     payload[value] = count;
   });
-  expect(payload).toMatchObject({
+
+  assert.deepStrictEqual(payload, {
     boo: 2,
     bar: 1
   });
 });
-
