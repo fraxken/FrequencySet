@@ -16,9 +16,6 @@
     <a href="https://github.com/fraxken/FrequencySet">
         <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
     </a>
-    <a href="https://github.com/fraxken/FrequencySet">
-        <img src="https://img.shields.io/github/workflow/status/fraxken/FrequencySet/Node.js%20CI" alt="githubaction">
-    </a>
 </p>
 
 ## Requirements
