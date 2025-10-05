@@ -1,9 +1,11 @@
-// Require Internal Dependencies
-const {
-  isIterable, isValidStringPrimitive, isKeyValueArray
-} = require("./src/utils.js");
+// Import Internal Dependencies
+import {
+  isIterable,
+  isValidStringPrimitive,
+  isKeyValueArray
+} from "./utils.js";
 
-class FrequencySet {
+export default class FrequencySet {
   #data = new Map();
 
   constructor(iterable = []) {
@@ -82,5 +84,3 @@ class FrequencySet {
     return payload;
   }
 }
-
-module.exports = FrequencySet;

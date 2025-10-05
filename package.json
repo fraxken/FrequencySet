@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "A set that keeps the frequency of occurrences.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "node --test"
   },
@@ -11,8 +12,6 @@
     "url": "git+https://github.com/fraxken/FrequencySet.git"
   },
   "files": [
-    "index.js",
-    "index.d.ts",
     "src"
   ],
   "keywords": [
