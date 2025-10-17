@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { deepStrictEqual, strictEqual, throws } from "node:assert";
 
 // Import Internal Dependencies
-import FrequencySet from "../src/index.js";
+import FrequencySet from "../src/index.ts";
 
 test("Create a new FrequencySet with null or undefined must work", () => {
   const v1 = new FrequencySet(null);
@@ -42,6 +42,7 @@ test("Create a new FrequencySet with value and count", () => {
 
 test("Create a new FrequencySet with a non-iterable value (it must throw a TypeError)", () => {
   throws(() => {
+    // @ts-expect-error
     new FrequencySet({});
   }, TypeError, "object is not iterable (cannot read property Symbol(Symbol.iterator))");
 });
@@ -70,6 +71,7 @@ test("Add values to a FrequencySet with a custom count", () => {
 test("Add count must be a number", () => {
   throws(() => {
     const fs = new FrequencySet();
+    // @ts-expect-error
     fs.add("boo", {});
   }, TypeError, "count must be a number");
 });
@@ -126,9 +128,9 @@ test("toJSON() must skip all non-valid string value", () => {
 });
 
 test("forEach FrequencySet", () => {
-  const fs = new FrequencySet(["boo", "boo", "bar"]);
+  const fs = new FrequencySet<string>(["boo", "boo", "bar"]);
 
-  const payload = {};
+  const payload: Record<string, number> = {};
   fs.forEach((value, count) => {
     payload[value] = count;
   });

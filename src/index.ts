@@ -1,23 +1,18 @@
-// Import Internal Dependencies
-import {
-  isIterable,
-  isValidStringPrimitive,
-  isKeyValueArray
-} from "./utils.js";
+export default class FrequencySet<T = any> {
+  #data = new Map<T, { count: number; }>();
 
-export default class FrequencySet {
-  #data = new Map();
-
-  constructor(iterable = []) {
+  constructor(
+    iterable: Iterable<T> | Iterable<[T, number]> | null | undefined = []
+  ) {
     if (iterable === null || iterable === undefined) {
       return;
     }
-    if (!isIterable(iterable)) {
+    if (typeof iterable[Symbol.iterator] !== "function") {
       throw new TypeError("object is not iterable (cannot read property Symbol(Symbol.iterator))");
     }
 
     for (const value of iterable) {
-      if (isKeyValueArray(value)) {
+      if (Array.isArray(value)) {
         this.add(...value);
       }
       else {
@@ -26,13 +21,16 @@ export default class FrequencySet {
     }
   }
 
-  add(value, count = 1) {
+  add(
+    value: T,
+    count: number = 1
+  ): this {
     if (typeof count !== "number") {
       throw new TypeError("count must be a number");
     }
 
     if (this.#data.has(value)) {
-      this.#data.get(value).count += count;
+      this.#data.get(value)!.count += count;
     }
     else {
       this.#data.set(value, { count });
@@ -41,40 +39,43 @@ export default class FrequencySet {
     return this;
   }
 
-  clear() {
+  clear(): void {
     this.#data.clear();
   }
 
-  delete(value) {
+  delete(value: T): boolean {
     return this.#data.delete(value);
   }
 
-  * entries() {
+  * entries(): IterableIterator<[T, number]> {
     for (const [value, { count }] of this.#data.entries()) {
       yield [value, count];
     }
   }
 
-  * [Symbol.iterator]() {
+  * [Symbol.iterator](): IterableIterator<[T, number]> {
     yield* this.entries();
   }
 
-  forEach(callback, thisArg) {
+  forEach(
+    callback: (value: T, count: number, set: FrequencySet<T>) => void,
+    thisArg?: any
+  ) {
     for (const [value, count] of this.entries()) {
       callback.call(thisArg, value, count, this);
     }
   }
 
-  has(value) {
+  has(value: T): boolean {
     return this.#data.has(value);
   }
 
-  values() {
+  values(): IterableIterator<T> {
     return this.#data.keys();
   }
 
-  toJSON() {
-    const payload = [];
+  toJSON(): [string, number][] {
+    const payload: [string, number][] = [];
     for (const [value, count] of this.entries()) {
       if (isValidStringPrimitive(value)) {
         payload.push([String(value), count]);
@@ -83,4 +84,12 @@ export default class FrequencySet {
 
     return payload;
   }
+}
+
+function isValidStringPrimitive(
+  value: unknown
+): value is string {
+  const vT = typeof value;
+
+  return !(vT === "function" || (vT === "object" && value !== null));
 }

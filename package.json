@@ -2,9 +2,10 @@
   "name": "frequency-set",
   "version": "2.0.1",
   "description": "A set that keeps the frequency of occurrences.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "test": "node --test"
   },
   "repository": {
@@ -12,7 +13,7 @@
     "url": "git+https://github.com/fraxken/FrequencySet.git"
   },
   "files": [
-    "src"
+    "dist"
   ],
   "keywords": [
     "set",
@@ -27,6 +28,8 @@
   },
   "homepage": "https://github.com/fraxken/FrequencySet#readme",
   "devDependencies": {
-    "@openally/config.eslint": "^2.2.0"
+    "@openally/config.eslint": "^2.2.0",
+    "@openally/config.typescript": "^1.2.1",
+    "@types/node": "^24.8.1"
   }
 }
