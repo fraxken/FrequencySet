@@ -1,6 +1,6 @@
 {
   "name": "frequency-set",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A set that keeps the frequency of occurrences.",
   "main": "src/index.js",
   "type": "module",
